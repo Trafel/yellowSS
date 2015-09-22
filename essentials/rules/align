@@ -1,0 +1,1 @@
+.align-top {vertical-align: top} .align-middle {vertical-align: middle; height: 100%; line-height: 100%} .align-bottom {vertical-align: bottom} .align-left {text-align: left} .align-center {text-align: center} .align-right {text-align: right} .centerize {margin: auto}

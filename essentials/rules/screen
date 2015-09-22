@@ -1,0 +1,1 @@
+.screen-top {top: 0px} .screen-middle-set {top: 50%} .screen-middle {top:-50%} .screen-bottom {bottom: 0px} .screen-left {left: 0px} .screen-center-set {left: 50%} .screen-center {left: -50%} .screen-right {right: 0px}
