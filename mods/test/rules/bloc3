@@ -1,0 +1,4 @@
+.bloc3 {
+    color: blue;
+    font-weight: bold;
+}

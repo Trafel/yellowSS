@@ -1,6 +1,6 @@
 {
   "name": "yellowss",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "CSS and Javascript framework for page rendering.",
   "main": "loader",
   "dependencies": {

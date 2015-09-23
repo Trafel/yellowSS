@@ -1,0 +1,78 @@
+global.app = require('express')();
+global.http = require('http').Server(app);
+global.io = require('socket.io')(http);
+
+// ======================================================== //
+
+var getAttributes = function(request, response, object) { //function that loads and merges page and global attributes
+    var attributes = clone(globalAttributes);
+
+    if(object) {
+        for (var property in object) {
+            if (object.hasOwnProperty(property)) {
+                if (property == 'script') {
+                    attributes[property] = quickTag('script', 'type', 'text/javascript', object[property]);
+                } else if (isArray(property)) {
+                    var tag, attribute, value, content;
+                    for (var i = 0; i < attributes[property].length; i++) {
+                        tag = object[property][i][1] ? object[property][i][1] : false;
+                        attribute = object[property][i][1] ? object[property][i][1] : false;
+                        value = object[property][i][1] ? object[property][i][1] : false;
+                        content = object[property][i][1] ? object[property][i][1] : false;
+                        attributes[property] = quickTag(tag, attribute, value, content);
+                    }
+                } else {
+                    attributes[property] = object[property];
+                }
+            }
+        }
+    }
+
+    attributes.request = request;
+    attributes.response = response;
+
+    return attributes;
+};
+var control = function(input, output, pageAttributes) {
+    if (Number.isInteger(input)) {
+        app.use(function(req, res, next){
+            res.setHeader('Content-Type', 'text/html');
+            res.status(input).send(output);
+        });
+    } else {
+        app.get(input, function(request, response) {
+            response.render(output, getAttributes(request, response, pageAttributes));
+        });
+    }
+};
+var setServer = function(engine, globalAtt, callback) {
+    app.set('view engine', engine);
+    global.globalAttributes = globalAtt;
+    callback();
+};
+
+// ======================================================== //
+
+global.quickTag = function(tag, attribute, value, content) {
+    var property = attribute + '="' + value + '"';
+    var head = '<' + tag + ' ';
+    var foot = '/>';
+
+    if (content) {
+        foot = '>' + content + '</' + tag + '>';
+    }
+
+    return head + property + foot;
+};
+
+var isArray = function(variable) {
+    return variable.constructor === Array;
+};
+
+var initialize = function(port, callback) {
+    http.listen(port, callback);
+};
+
+module.exports.control = control;
+module.exports.set = setServer;
+module.exports.initialize = initialize;

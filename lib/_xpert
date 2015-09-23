@@ -1,0 +1,35 @@
+var objectToArray = function(obj) {
+	var array = [];
+
+	for (var property in obj) {
+		if (obj.hasOwnProperty(property)) {
+			if (typeof(obj[property]) === 'object') {
+				array[property] = objectToArray(obj[property]);
+			} else {
+				array[property] = obj[property];
+			}
+		}
+	}
+
+	return array;
+};
+
+global.inArray = function(element, array) {
+	for(var i=0; i < array.length; i++){
+		if(array[i] === element){
+			return true;
+		}
+	}
+	return false;
+};
+
+global.clone = function(obj) {
+	if (null == obj || "object" != typeof obj) return obj;
+	var copy = obj.constructor();
+	for (var attr in obj) {
+		if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
+	}
+	return copy;
+}
+
+ module.exports.objectToArray = objectToArray;

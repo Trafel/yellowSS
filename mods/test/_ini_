@@ -1,0 +1,25 @@
+{
+    "name": "test",
+    "version": "0.0.1",
+    "description": "test module for yellowSS",
+    "libraries": {
+        "bloc1": 5,
+        "bloc2": 2,
+        "bloc3": 5
+    },
+    "scripts": {},
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
+    "keywords": [
+        "test",
+        "yellowss"
+    ],
+    "author": "marc <markk@gmail.com> (https://...)",
+    "license": "free",
+    "bugs": {
+        "url": ""
+    },
+    "homepage": ""
+}

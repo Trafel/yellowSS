@@ -1,0 +1,53 @@
+{
+  "name": "test",
+  "version": "0.0.1",
+  "description": "test module for yellowSS",
+  "libraries":
+  {
+    "aero": 3,
+    "aero-bottom": 3,
+    "aero-top": 3,
+    "align": 4,
+    "display": 5,
+    "float": 4,
+    "height": 4,
+    "line-height": 5,
+    "margin": 4,
+    "margin-bottom": 4,
+    "margin-left": 4,
+    "margin-right": 4,
+    "margin-top": 4,
+    "overflow": 4,
+    "padding": 4,
+    "position": 4,
+    "reset": 5,
+    "screen": 3,
+    "set-background-color": 5,
+    "set-font-color": 4,
+    "set-font-decoration": 4,
+    "set-font-family": 4,
+    "set-font-size": 4,
+    "set-font-weight": 5,
+    "stick": 5,
+    "width": 4
+  },
+  "scripts": {
+
+  },
+  "repository":
+  {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [
+    "test",
+    "yellowss"
+  ],
+  "author": "marc <markk@gmail.com> (https://...)",
+  "license": "free",
+  "bugs":
+  {
+    "url": ""
+  },
+  "homepage": ""
+}

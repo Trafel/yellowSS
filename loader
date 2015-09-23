@@ -1,0 +1,86 @@
+var fs = require('fs');
+var synaptic = require('./lib/_synaptic');
+var xpert = require('./lib/_xpert');
+
+// =============================================================//
+
+var directory = "./node_modules/yellowss/";
+var mod_directory = "mods/";
+var mod_file_info = "_ini_";
+var mod_lib_directory = "rules/";
+var default_reliability_choice = 3;
+var s = '/';
+
+// =============================================================//
+
+module.exports = function(library, ignore, option) {
+    var style ="";
+
+    var action = function(mod, library, ignore, option) {
+        var data = ini(mod);
+        var stylesheet = "";
+
+        if (!ignore) {
+            var ignore = [];
+        }
+
+        if (!option) {
+            var option = default_reliability_choice;
+        }
+
+        var reliable = function (reliability, option) {
+            if (reliability && option <= reliability) {
+                return true;
+            }
+        }
+
+        if (library && library.toUpperCase() !== 'ALL') {
+            if (reliable(data[library], option)) {
+                stylesheet = getLib(mod, library);
+            }
+        } else {
+            for (var element in data['libraries']) {
+                if (!inArray(element, ignore)) {
+                    if (reliable(data['libraries'][element], option)) {
+                        stylesheet += getLib(mod, element);
+                    }
+                }
+            }
+        }
+
+        return stylesheet;
+    }
+
+    for (var y = 0; y < yellow_modArray.length; y++) {
+        style += action(yellow_modArray[y], library, ignore, option);
+    }
+
+    style = quickTag('style', 'type', 'text/css', style);
+    return style;
+}
+
+module.exports.load = function(array) {
+    global.yellow_modArray = array;
+}
+
+var ini = function(mod) {
+    var data, path = directory + mod_directory + mod + s + mod_file_info;
+    data = fs.readFileSync(path, 'utf-8');
+    data = JSON.parse(data);
+    data = xpert.objectToArray(data);
+    return data;
+}
+
+var getLib = function(mod, lib) {
+    var data, path = directory + mod_directory + mod + s + mod_lib_directory + lib;
+    data = fs.readFileSync(path, 'utf-8');
+    return data;
+}
+
+module.exports.synaptic = {};
+module.exports.xpert = {};
+
+module.exports.synaptic.set = synaptic.set;
+module.exports.synaptic.control = synaptic.control;
+module.exports.synaptic.initialize = synaptic.initialize;
+module.exports.xpert.objectToArray = xpert.objectToArray;

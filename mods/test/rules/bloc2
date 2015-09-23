@@ -1,0 +1,4 @@
+.bloc2 {
+    color: orange;
+    font-weight: bold;
+}
